@@ -29,7 +29,8 @@ jobs:
       - restore_cache:
           key: build-cache
       - run: tar xzf ~/app/build.tgz && cd build
-      - aws-cli/install
+      - aws-cli/install:
+          override-installed: true
       - aws-ecr/build-and-push-image:
           checkout: false
           account-url: ACCOUNT_URL
