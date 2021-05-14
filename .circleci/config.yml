@@ -17,6 +17,7 @@ jobs:
           key: build-cache
           paths:
             - ~/app/build
+            - ~/app/Dockerfile
   build-push-image:
     machine: true
     steps:
