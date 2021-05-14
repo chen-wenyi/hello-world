@@ -1,11 +1,11 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1
-working_directory: ~/app
 jobs:
   build-static-files:
     docker:
       - image: cimg/node:15.1
+    working_directory: ~/app
     steps:
       - checkout
       - node/install-packages:
@@ -13,17 +13,21 @@ jobs:
       - run:
           name: Run Build
           command: yarn run build
+      - run:
+          name: Build Tar
+          command:
+            - tar czf build.tgz ./build ./Dockerfile
       - save_cache:
-          key: build-cache
+          key: build-cache-{{ checksum "build.tgz" }}
           paths:
-            - ~/app/build
-            - ~/app/Dockerfile
+            - ~/app/build.tgz
   build-push-image:
     machine: true
+    working_directory: ~/app
     steps:
       - restore_cache:
           key: build-cache
-      - run: cd $CIRCLE_WORKING_DIRECTORY
+      - run: tar xzf ~/app/build.tgz && cd build
       - run:
           name: DockerHub Login
           command: docker login -u cwy805435028 -p -Cwyzjgyslj301
