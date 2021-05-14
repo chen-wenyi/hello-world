@@ -44,7 +44,7 @@ jobs:
           tag: 'latest'
       - aws-ecs/update-service:
           cluster-name: 'hello-world'
-          container-image-name-updates: 'container=custom-service,tag=latest'
+          container-image-name-updates: 'container=custom,tag=latest'
           family: 'first-run-task-definition:2'
 workflows:
   Build and Push:
