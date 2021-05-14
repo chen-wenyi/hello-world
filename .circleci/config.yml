@@ -3,6 +3,7 @@ orbs:
   node: circleci/node@4.1
   aws-cli: circleci/aws-cli@2.0
   aws-ecr: circleci/aws-ecr@7.0.0
+  aws-ecs: circleci/aws-ecs@2.0.0
 jobs:
   build-static-files:
     docker:
@@ -26,8 +27,6 @@ jobs:
     machine: true
     working_directory: ~/app
     steps:
-      - run: echo ${ACCESS_KEY}
-      - run: echo ${SECRET_ACCESS_KEY}
       - restore_cache:
           key: build-cache
       - run: tar xzf ~/app/build.tgz && cd build
@@ -43,6 +42,10 @@ jobs:
           skip-when-tags-exist: false
           region: REGION
           tag: 'latest'
+      - aws-ecs/update-service:
+          cluster-name: 'hello-world'
+          container-image-name-updates: 'container=custom-service,tag=latest'
+          family: 'first-run-task-definition:2'
 workflows:
   Build and Push:
     jobs:
