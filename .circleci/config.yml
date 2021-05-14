@@ -5,8 +5,6 @@ working_directory: ~/app
 jobs:
   build-and-push:
     machine: true
-    docker:
-      - image: cimg/node:15.1
     steps:
       - checkout
       - node/install-packages:
