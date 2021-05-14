@@ -16,7 +16,6 @@ jobs:
       - save_cache:
           key: build-cache
           paths: ~/app/build
-        - ~/d1
     build-push-image:
       machine: true
       steps:
