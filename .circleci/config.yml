@@ -15,25 +15,26 @@ jobs:
           command: yarn run build
       - save_cache:
           key: build-cache
-          paths: ~/app/build
-    build-push-image:
-      machine: true
-      steps:
-        - restore_cache:
-            key: build-cache
-        - run:
-            name: DockerHub Login
-            command: docker login -u cwy805435028 -p -Cwyzjgyslj301
-        - run:
-            name: Build Image
-            command: docker build -t cwy805435028/cicd
-        - run:
-            name: Push Image
-            command: docker push cwy805435028/cicd
+          paths:
+            - ~/app/build
+  build-push-image:
+    machine: true
+    steps:
+      - restore_cache:
+          key: build-cache
+      - run:
+          name: DockerHub Login
+          command: docker login -u cwy805435028 -p -Cwyzjgyslj301
+      - run:
+          name: Build Image
+          command: docker build -t cwy805435028/cicd
+      - run:
+          name: Push Image
+          command: docker push cwy805435028/cicd
 workflows:
   Build and Push:
     jobs:
       - build-static-files
-      - build-push-image
+      - build-push-image:
           requires:
             - build-static-files
