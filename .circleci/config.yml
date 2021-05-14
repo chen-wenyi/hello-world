@@ -26,6 +26,8 @@ jobs:
     machine: true
     working_directory: ~/app
     steps:
+      - run: echo ${ACCESS_KEY}
+      - run: echo ${SECRET_ACCESS_KEY}
       - restore_cache:
           key: build-cache
       - run: tar xzf ~/app/build.tgz && cd build
