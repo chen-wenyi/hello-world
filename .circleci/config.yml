@@ -28,7 +28,7 @@ jobs:
           command: docker login -u cwy805435028 -p -Cwyzjgyslj301
       - run:
           name: Build Image
-          command: docker build -t cwy805435028/cicd
+          command: docker build -t cwy805435028/cicd .
       - run:
           name: Push Image
           command: docker push cwy805435028/cicd
