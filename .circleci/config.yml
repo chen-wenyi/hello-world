@@ -28,8 +28,8 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          name: Run tests
-          command: npm test
+          name: Run Build
+          command: yarn run build
 
 workflows:
   # Below is the definition of your workflow.
