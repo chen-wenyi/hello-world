@@ -36,6 +36,7 @@ jobs:
           no-output-timeout: 20m
           repo: hello-world
           skip-when-tags-exist: false
+          region: REGION
           tag: 'latest'
 workflows:
   Build and Push:
