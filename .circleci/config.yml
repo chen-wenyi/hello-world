@@ -15,8 +15,7 @@ jobs:
           command: yarn run build
       - run:
           name: Build Tar
-          command:
-            - tar czf build.tgz ./build ./Dockerfile
+          command: tar czf build.tgz ./build ./Dockerfile
       - save_cache:
           key: build-cache-{{ checksum "build.tgz" }}
           paths:
