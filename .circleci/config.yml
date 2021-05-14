@@ -7,7 +7,7 @@ orbs:
   # Orbs reduce the amount of configuration required for common tasks.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@4.1
-
+working_directory: /app
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test:
@@ -30,6 +30,8 @@ jobs:
       - run:
           name: Run Build
           command: yarn run build
+      - store_artifacts:
+          path: /build
 
 workflows:
   # Below is the definition of your workflow.
