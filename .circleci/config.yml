@@ -46,6 +46,7 @@ jobs:
           cluster-name: 'hello-world'
           container-image-name-updates: 'container=custom,tag=latest'
           family: 'first-run-task-definition'
+          service-name: 'custom-service'
 workflows:
   Build and Push:
     jobs:
