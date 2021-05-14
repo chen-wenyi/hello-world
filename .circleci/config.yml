@@ -23,6 +23,7 @@ jobs:
     steps:
       - restore_cache:
           key: build-cache
+      - run: cd $CIRCLE_WORKING_DIRECTORY
       - run:
           name: DockerHub Login
           command: docker login -u cwy805435028 -p -Cwyzjgyslj301
