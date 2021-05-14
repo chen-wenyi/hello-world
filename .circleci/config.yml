@@ -4,13 +4,11 @@ orbs:
 working_directory: ~/app
 jobs:
   build-and-push:
+    machine: true
     docker:
       - image: cimg/node:15.1
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 19.03.13
-          docker_layer_caching: true
       - node/install-packages:
           pkg-manager: yarn
       - run:
