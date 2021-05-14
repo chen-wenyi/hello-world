@@ -3,8 +3,9 @@ orbs:
   node: circleci/node@4.1
 working_directory: ~/app
 jobs:
-  build-and-push:
-    machine: true
+  build-static-files:
+    docker:
+      - image: cimg/node:15.1
     steps:
       - checkout
       - node/install-packages:
@@ -12,17 +13,28 @@ jobs:
       - run:
           name: Run Build
           command: yarn run build
-      - run:
-          name: DockerHub Login
-          command: docker login -u cwy805435028 -p -Cwyzjgyslj301
-      - run:
-          name: Build Image
-          command: docker build -t cwy805435028/cicd
-      - run:
-          name: Push Image
-          command: docker push cwy805435028/cicd
-
+      - save_cache:
+          key: build-cache
+          paths: ~/app/build
+        - ~/d1
+    build-push-image:
+      machine: true
+      steps:
+        - restore_cache:
+            key: build-cache
+        - run:
+            name: DockerHub Login
+            command: docker login -u cwy805435028 -p -Cwyzjgyslj301
+        - run:
+            name: Build Image
+            command: docker build -t cwy805435028/cicd
+        - run:
+            name: Push Image
+            command: docker push cwy805435028/cicd
 workflows:
   sample:
     jobs:
-      - build-and-push
+      - build-static-files
+      - build-push-image
+          requires:
+            - build-static-files
