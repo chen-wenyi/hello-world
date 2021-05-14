@@ -29,9 +29,9 @@ jobs:
           key: build-cache
       - run: tar xzf ~/app/build.tgz && cd build
       - aws-ecr/build-and-push-image:
-          account-url: 636597884343.dkr.ecr.ap-northeast-1.amazonaws.com
-          aws-access-key-id: AKIAZIOBQ2W3ZPXRDY5T
-          aws-secret-access-key: Yu2GZ9nXnbothXW1MqokyHCarN+Qh0Obt+aJjnQ
+          account-url: ACCOUNT_URL
+          aws-access-key-id: ACCESS_KEY
+          aws-secret-access-key: SECRET_ACCESS_KEY
           no-output-timeout: 20m
           repo: hello-world
           skip-when-tags-exist: false
