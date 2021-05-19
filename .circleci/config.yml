@@ -43,10 +43,10 @@ jobs:
           region: REGION
           tag: 'latest'
       - aws-ecs/update-service:
-          cluster-name: 'hello-world'
-          container-image-name-updates: 'container=custom,tag=latest'
-          family: 'first-run-task-definition'
-          service-name: 'custom-service'
+          cluster-name: 'my-cicd-cluster'
+          container-image-name-updates: 'container=CICD,tag=latest'
+          family: 'CICD'
+          service-name: 'my-cicd-service'
 workflows:
   Build and Push:
     jobs:

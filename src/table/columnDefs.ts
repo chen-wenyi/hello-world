@@ -29,12 +29,12 @@ export const columnDefs: (ColDef | ColGroupDef)[] = [
     },
   },
   {
-    headerName: 'Ins',
+    headerName: 'Insta',
     field: fields.ins,
     editable: true,
   },
   {
-    headerName: 'FB',
+    headerName: 'Feb',
     field: fields.fb,
     editable: true,
   },
