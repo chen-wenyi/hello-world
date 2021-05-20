@@ -32,6 +32,10 @@ jobs:
       - run: tar xzf ~/app/build.tgz && cd build
       - aws-cli/install:
           override-installed: true
+      - aws-cli/setup:
+          aws-region: REGION
+          aws-access-key-id: ACCESS_KEY
+          aws-secret-access-key: SECRET_ACCESS_KEY
       - run:
           name: Stop Running Task
           command: |
