@@ -32,6 +32,13 @@ jobs:
       - run: tar xzf ~/app/build.tgz && cd build
       - aws-cli/install:
           override-installed: true
+      - run:
+          name: Stop Running Task
+          command: |
+            cicdTaskArn=$(aws ecs list-tasks --cluster my-cicd-cluster --service-name my-cicd-service --output text --query taskArns)
+            if [[ $cicdTaskArn ]];then
+              aws ecs stop-task --cluster my-cicd-cluster --task $cicdTaskArn
+            fi
       - aws-ecr/build-and-push-image:
           checkout: false
           account-url: ACCOUNT_URL
